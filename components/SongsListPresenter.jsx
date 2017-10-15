@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import addSong from '../redux/actions.js';
+import {connect} from 'react-redux';
+import songsModule from '../redux/songModule.js';
 
 const SongsListPresenter = (props) => {
-  const {songs} = props;
+  const {songs, dispatch} = props;
   var inputText = '';
 
   function handleChange(event) {
@@ -11,9 +11,7 @@ const SongsListPresenter = (props) => {
   }
 
   function handleSubmit(event) {
-    props.addTheSong(addSong(
-      {name: inputText, key: 7, type: "ADD_SONG"}
-    ));
+    dispatch(songsModule.actions.addSong({name: inputText}));
     inputText = 'poo';
     event.target.reset();
     event.preventDefault();
@@ -21,34 +19,16 @@ const SongsListPresenter = (props) => {
   return (
     <div>
       <ul>
-        {
-          Array.from(songs).map((song) =>
-          <li key={song.key}>
-            {song.name}
-          </li>)
-        }
+        {Array.from(songs).map((song) => <li key={song.key}>
+          {song.name}
+        </li>)
+}
       </ul>
       <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          name='name'
-          placeholder={ inputText}
-          onChange={ handleChange } />
-        <input
-          type='submit'
-          value='name'
-
-           />
+        <input type='text' name='name' placeholder={inputText} onChange={handleChange}/>
+        <input type='submit' value='name'/>
       </form>
     </div>
   )
 }
-const SongsListPresenterConnected = connect(
-  function(state, ownProps) {
-    return {songs: state}
-  },
-  function(dispatch, ownProps) {
-    return ({addTheSong: (action) => dispatch(action)})
-  }
-)(SongsListPresenter)
-export default SongsListPresenterConnected;
+export default connect((state) => ({songs: state}))(SongsListPresenter);

@@ -1,22 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../components/App.jsx';
-import { Provider } from 'react-redux'
-import { applyMiddleware, createStore, compose } from 'redux';
-import songsReducer from '../redux/reducer.js'
+import {Provider} from 'react-redux'
+import {applyMiddleware, createStore, compose} from 'redux';
 import {persistStore, autoRehydrate} from 'redux-persist'
+import songsModule from '../redux/songModule.js';
 
-let store = createStore(
-  songsReducer,
-  [],
-  compose(
-    applyMiddleware(),
-    autoRehydrate()
-  )
-);
+let store = createStore(songsModule.reducer, [], compose(applyMiddleware(), autoRehydrate()));
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+  <App/>
+</Provider>, document.getElementById('root'));
