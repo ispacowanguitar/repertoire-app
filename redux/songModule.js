@@ -7,7 +7,7 @@ const addSongToState = (state, action) => {
   });
 }
 
-const songsModule = createModule('songsModule', [
+const songsModule = createModule('songs', [
   {
     name: 'first song',
     key: 1
