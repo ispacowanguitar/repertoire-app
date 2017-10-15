@@ -14,7 +14,8 @@ const SongsListPresenter = (props) => {
     props.addTheSong(addSong(
       {name: inputText, key: 7, type: "ADD_SONG"}
     ));
-    event.target.value = 'poo';
+    inputText = 'poo';
+    event.target.reset();
     event.preventDefault();
   }
   return (
@@ -31,12 +32,12 @@ const SongsListPresenter = (props) => {
         <input
           type='text'
           name='name'
-          placeholder={`you just typed ${inputText}`}
+          placeholder={ inputText}
           onChange={ handleChange } />
         <input
           type='submit'
           value='name'
-          onChange={ handleChange }
+
            />
       </form>
     </div>

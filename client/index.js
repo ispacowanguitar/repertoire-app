@@ -8,7 +8,7 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 
 let store = createStore(
   songsReducer,
-  [{name: 'first song', key: Math.floor((Math.random() * 1000) + 1)}],
+  [],
   compose(
     applyMiddleware(),
     autoRehydrate()
